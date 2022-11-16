@@ -1,6 +1,6 @@
 import styles from './index.less';
 import OneJobItem from '../oneJobItem';
-import { MutableRefObject, useEffect, useRef, useState } from 'react';
+import { MutableRefObject, UIEvent, useEffect, useRef, useState } from 'react';
 export default function (props: IScrollListConfig) {
   const ONE_SCROLL_DISTANCE = props.oneStepDistance || 100;
   const scrollDuration = props.scrollDuration || 2000;
@@ -48,13 +48,20 @@ export default function (props: IScrollListConfig) {
     console.log('effect:', scrollFlag, timer.current);
     clearInterval(timer.current);
     if (scrollFlag) {
+      setCurrScrollTop();
       scrollListAction();
+    } else {
     }
   }, [scrollFlag]);
 
   function mouseHoverFn(flag: boolean) {
     setScrollFlag(flag);
     console.log(scrollFlag);
+  }
+
+  // 如果用户有滚动时，更新currScrollTop
+  function setCurrScrollTop() {
+    currScrollTop.current = (containerEle.current as HTMLDivElement).scrollTop;
   }
 
   return (
@@ -67,7 +74,9 @@ export default function (props: IScrollListConfig) {
         className={styles.body}
         ref={containerEle}
         onMouseEnter={() => mouseHoverFn(false)}
+        onTouchStart={() => mouseHoverFn(false)}
         onMouseLeave={() => mouseHoverFn(true)}
+        onTouchEnd={() => mouseHoverFn(true)}
       >
         <div ref={itemWrapperEle}>
           {jobList.map((item, index) => (
