@@ -18,4 +18,5 @@ interface IJobItem {
 interface IScrollListConfig {
   scrollDuration?: number;
   oneStepDistance?: number;
+  list: Array<IJobItem>;
 }

@@ -8,18 +8,13 @@ export default function (props: IScrollListConfig) {
   const [jobList, setJobList] = useState(new Array<IJobItem>());
   let timer: any = useRef();
   const [scrollFlag, setScrollFlag] = useState(true);
-  const mockList = new Array(20).fill('').map((_, i) => ({
-    jobName: '工作-同城零售' + i,
-    position: '杭州',
-    time: 1668610877233,
-    beforeTime: '9分钟前',
-  }));
+
   const containerEle: MutableRefObject<HTMLDivElement | null> = useRef(null);
   const itemWrapperEle: MutableRefObject<HTMLDivElement | null> = useRef(null);
   // 初始化
   useEffect(() => {
     // 初始化数据
-    setJobList([...mockList]);
+    setJobList([...props.list]);
   }, []);
 
   function scrollListAction() {
