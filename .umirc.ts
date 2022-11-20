@@ -9,4 +9,5 @@ export default defineConfig({
     { path: '/testState', component: '@/pages/testState/index' },
   ],
   fastRefresh: {},
+  publicPath: './',
 });
