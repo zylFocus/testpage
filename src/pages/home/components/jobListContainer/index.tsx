@@ -2,6 +2,7 @@ import styles from './index.less';
 import OneJobItem from '../oneJobItem';
 import { MutableRefObject, UIEvent, useEffect, useRef, useState } from 'react';
 export default function (props: IScrollListConfig) {
+  console.log('job list container');
   const ONE_SCROLL_DISTANCE = props.oneStepDistance || 100;
   const scrollDuration = props.scrollDuration || 2000;
   let currScrollTop = useRef(0);
